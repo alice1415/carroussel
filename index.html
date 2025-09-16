@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrossel Simples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0372a5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .carrossel {
+      position: relative;
+      width: 600px;
+      height: 350px;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .slides {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Botões de navegação */
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.5);
+      color: rgb(250, 250, 250);
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 20px;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .prev:hover, .next:hover {
+      background: rgba(0,0,0,0.8);
+    }
+  </style>
+</head>
+<body>
+
+ <div class="carrossel">
+  <div class="slides">
+    <div class="slide"><img src="transferir (4).jpeg" alt="Paris"></div>
+    <div class="slide"><img src="transferir (5).jpeg" alt="Maldivas"></div>
+    <div class="slide"><img src="transferir.jpeg" alt="Nova York"></div>
+    <div class="slide"><img src="transferir (1).jpeg" alt="Roma"></div>
+    <div class="slide"><img src="transferir (2).jpeg" alt="Tóquio"></div>
+    <div class="slide"><img src="transferir (3).jpeg" alt="Sydney"></div>
+  </div>
+  <button class="prev">&#10094;</button>
+  <button class="next">&#10095;</button>
+</div>
+
+  <script>
+    const slides = document.querySelector(".slides");
+    const slide = document.querySelectorAll(".slide");
+    const prev = document.querySelector(".prev");
+    const next = document.querySelector(".next");
+
+    let index = 0;
+
+    function showSlide(i) {
+      index += i;
+      if (index < 0) index = slide.length - 1;
+      if (index >= slide.length) index = 0;
+      slides.style.transform = `translateX(${-index * 100}%)`;
+    }
+
+    prev.addEventListener("click", () => showSlide(-1));
+    next.addEventListener("click", () => showSlide(1));
+
+    // Carrossel automático (opcional)
+    setInterval(() => showSlide(1), 5000);
+  </script>
+</body>
+</html>
